@@ -1,20 +1,20 @@
 from typing import List, Any, Tuple
 
 
-class MatrixValidator:
+class MatrizValidator:
     @staticmethod
-    def validateMatrixStructure(matrix: Any, type: str) -> Tuple[bool, str]:
+    def validateMatrizStructure(matriz: Any, type: str) -> Tuple[bool, str]:
         typeMap = {
             'Number': int,
             'String': str
         }
-        if not isinstance(matrix, list):
+        if not isinstance(matriz, list):
             return False, "La matriz debe ser una lista"
         
-        if len(matrix) != 3:
+        if len(matriz) != 3:
             return False, "La matriz debe tener exactamente 3 filas"
         
-        for i, row in enumerate(matrix): # iterador por filas
+        for i, row in enumerate(matriz): # iterador por filas
             if not isinstance(row, list):
                 return False, f"La fila {i} debe ser una lista"
             
@@ -28,12 +28,12 @@ class MatrixValidator:
         return True, "La estructura de la matriz es válida"
     
     @staticmethod
-    def validateMatricesInput(matrix1: Any, matrix2: Any, i: int, j: int) -> Tuple[bool, str]:
-        is_Valid1, message1 = MatrixValidator.validateMatrixStructure(matrix1, 'Number')
+    def validateMatricesInput(matriz1: Any, matriz2: Any, i: int, j: int) -> Tuple[bool, str]:
+        is_Valid1, message1 = MatrizValidator.validateMatrizStructure(matriz1, 'Number')
         if not is_Valid1:
             return False, f"Error en Matriz 1: {message1}"
         
-        isValid2, message2 = MatrixValidator.validateMatrixStructure(matrix2, 'String')
+        isValid2, message2 = MatrizValidator.validateMatrizStructure(matriz2, 'String')
         if not isValid2:
             return False, f"Error en Matriz 2: {message2}"
 
