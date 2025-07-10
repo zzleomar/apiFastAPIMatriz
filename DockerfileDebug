@@ -1,0 +1,19 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Copiar requirements.txt primero para aprovechar el cache de Docker
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+# Copiar el resto de la aplicación
+COPY . .
+
+# Definir el puerto por defecto
+ENV PORT=8002
+
+# Exponer el puerto dinámico
+EXPOSE $PORT
+
+# Comando para iniciar la aplicación
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port $PORT"]
