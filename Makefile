@@ -1,6 +1,6 @@
 # Makefile para API Matriz
 # Variables por defecto
-PORT ?= 8002
+PORT ?= 8000
 CONTAINER_NAME = apimatriz_$(PORT)
 
 # Colores para output
@@ -18,7 +18,7 @@ help: ## Mostrar ayuda
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 	@echo ""
 	@echo "$(YELLOW)Ejemplos de uso:$(NC)"
-	@echo "  make up                    # Iniciar en puerto 8002"
+	@echo "  make up                    # Iniciar en puerto 8000"
 	@echo "  make up PORT=8003          # Iniciar en puerto 8003"
 	@echo "  make logs                  # Ver logs en tiempo real"
 	@echo "  make restart PORT=8004     # Reiniciar en puerto 8004"
@@ -92,16 +92,16 @@ dev-8005: ## Iniciar en puerto 8005 y mostrar logs
 	@make dev PORT=8005
 
 # Comandos de múltiples puertos
-multi-up: ## Iniciar múltiples instancias (8002, 8003, 8004)
+multi-up: ## Iniciar múltiples instancias (8000, 8001, 8002)
+	@make up PORT=8000
+	@make up PORT=8001
 	@make up PORT=8002
-	@make up PORT=8003
-	@make up PORT=8004
 	@echo "$(GREEN)✅ Múltiples instancias iniciadas$(NC)"
 
 multi-down: ## Detener múltiples instancias
+	@make down PORT=8000
+	@make down PORT=8001
 	@make down PORT=8002
-	@make down PORT=8003
-	@make down PORT=8004
 	@echo "$(RED)✅ Múltiples instancias detenidas$(NC)"
 
 multi-status: ## Ver estado de múltiples instancias

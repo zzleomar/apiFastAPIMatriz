@@ -201,4 +201,23 @@ PORT=8003 python main.py
 ```
 
 ### comando para activar el entorno virtual
-source venv/bin/activate 
+source venv/bin/activate
+
+## Deploy en Railway
+
+✅ **Configurado para Railway**: El Dockerfile está optimizado para Railway con expansión correcta de variables de entorno.
+
+Ver guía completa: [RAILWAY_DEPLOY.md](RAILWAY_DEPLOY.md)
+
+### Quick Deploy
+1. Conecta el repo a Railway
+2. Railway detecta automáticamente el Dockerfile
+3. Deploy automático con variable `PORT` dinámica
+
+### Health Checks
+- `GET /` - Health check básico
+- `GET /health` - Health check para Railway
+
+### Solución aplicada para Railway
+❌ **Error anterior:** `'$PORT' is not a valid integer`
+✅ **Solución:** `CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]` 
