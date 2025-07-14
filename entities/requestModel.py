@@ -12,3 +12,6 @@ class MatrixRequest(BaseModel):
     matrix2: List[List[Any]]
     i: int
     j: int
+
+class MatrizRequest(BaseModel):
+    matriz: List[List[Any]]

@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from routes.invoice_routes import router as invoiceRouter
 from routes.matriz_routes import router as matrizRouter
+from routes.operation_matriz_routes import router as matrizOperationRouter
 
 load_dotenv()
 
@@ -24,6 +25,7 @@ PORT = int(os.getenv("PORT", 8000))
 
 # Incluir routers
 app.include_router(invoiceRouter)
+app.include_router(matrizOperationRouter)
 app.include_router(matrizRouter)
 
 @app.get("/")

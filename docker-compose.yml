@@ -1,11 +1,18 @@
 services:
   apimatriz:
-    build: .
+    build:
+      context: .
+      dockerfile: DockerfileDebug
+    env_file:
+      - ./docker/api.env
     ports:
       - "${PORT:-8000}:${PORT:-8000}"
     environment:
       - PORT=${PORT:-8000}
-    container_name: apimatriz_${PORT:-8000}
+    volumes:
+      - .:/app
+      - /app/venv
+    container_name: apimatriz
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${PORT:-8000}/"]
